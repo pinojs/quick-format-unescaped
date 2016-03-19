@@ -18,9 +18,8 @@ when we pass in more arguments than interpolation characters, e.g
 util.format('hello %s %j %d', 'world', {obj: true}, 4, {another: 'obj'})
 ```
 
-`quick-format` fixes that problem, though this module
-will likely become redundant with later releases since this code
-was taken (and modified) from Node's master branch.
+This is mostly due to the use of `util.inspect`. Use `JSON.stringify`
+(safely) instead which is significantly faster. 
 
 It also takes an array instead of arguments, which helps us 
 avoid the use of `apply` in some cases.

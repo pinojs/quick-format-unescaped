@@ -19,6 +19,6 @@ var run = bench([
     quickFormat(['hello %s %j %d', 'world', {obj: true}, 4, {another: 'obj'}])
     setImmediate(cb)
   }
-], 50000)
+], 100000)
 
 run(run)
