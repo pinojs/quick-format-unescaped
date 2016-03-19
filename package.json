@@ -1,0 +1,16 @@
+{
+  "name": "quick-format",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node test"
+  },
+  "author": "David Mark Clements",
+  "devDependencies": {
+    "fastbench": "^1.0.1"
+  }
+}
