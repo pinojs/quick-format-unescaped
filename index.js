@@ -1,6 +1,9 @@
-var ss = require('fast-safe-stringify')
-
-module.exports = function format(args) {
+var safeStringify = require('fast-safe-stringify')
+function tryStringify (o) {
+  try { return JSON.stringify(o) } catch(e) { return '"[Circular]"' }
+}
+module.exports = function format(args, opts) {
+  var ss = (opts && opts.lowres) ? tryStringify : safeStringify
   var f = args[0]
   if (typeof f !== 'string') {
     const objects = new Array(args.length)

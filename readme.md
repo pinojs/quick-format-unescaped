@@ -6,13 +6,23 @@ Solves a problem with util.format
 
 ```js
 var format = require('quick-format')
-format(['hello %s %j %d', 'world', {obj: true}, 4, {another: 'obj'}])
+var options = {lowres: false} // <--default
+format(['hello %s %j %d', 'world', {obj: true}, 4, {another: 'obj'}], options)
 ```
 
-## caveat!
+## options
+
+### lowres
+
+Passing an options object with `lowres: true` will cause quick-format any object with a circular as a string with the value '"[Circular]"'. The default behaviour is to label
+circular references in an object, instead of abandoning the entire object. Naturally, 
+`lowres` is a faster mode, and assumes you have made the decision to ensure the objects
+you're passing have no circular references.
+
+## caveats
 
 We use `JSON.stringify` instead of `util.inspect`, this means object
-methods *will not be serialized*.
+methods (functions) *will not be serialized*.
 
 ##  util.format
 
@@ -33,18 +43,23 @@ Also - for speed purposes, we ignore symbol.
 
 ## Benchmarks
 
-Whilst non-tailing case is slightly around a third slower with util.format,
-the tailing case is 3x faster.
+Whilst exact matching of objects to interpolation characters is slower,
+the case of additional objects is 3x faster. Further, using `lowres` mode
+brings us closer to `util.inspect` speeds.
 
 ```
-util*100000: 213.905ms
-quick*100000: 301.262ms
-utilWithTailObj*100000: 999.734ms
-quickWithTailObj*100000: 360.216ms
-util*100000: 223.177ms
-quick*100000: 307.062ms
-utilWithTailObj*100000: 998.736ms
-quickWithTailObj*100000: 361.509ms
+util*100000: 205.978ms
+quickLowres*100000: 236.337ms
+quick*100000: 292.018ms
+utilWithTailObj*100000: 1054.592ms
+quickWithTailObjLowres*100000: 267.992ms
+quickWithTailObj*100000: 343.048ms
+util*100000: 212.011ms
+quickLowres*100000: 226.441ms
+quick*100000: 296.600ms
+utilWithTailObj*100000: 1020.195ms
+quickWithTailObjLowres*100000: 267.331ms
+quickWithTailObj*100000: 343.867ms
 ```
 
 ## Acknowledgements
