@@ -1,6 +1,6 @@
 # quick format
 
-Solves a problem with util.format in <= Node 5.9
+Solves a problem with util.format
 
 ## usage
 
@@ -8,6 +8,11 @@ Solves a problem with util.format in <= Node 5.9
 var format = require('quick-format')
 format(['hello %s %j %d', 'world', {obj: true}, 4, {another: 'obj'}])
 ```
+
+## caveat!
+
+We use `JSON.stringify` instead of `util.inspect`, this means object
+methods *will not be serialized*.
 
 ##  util.format
 
@@ -28,18 +33,18 @@ Also - for speed purposes, we ignore symbol.
 
 ## Benchmarks
 
-Benchmarks are very marginally slower than 5.9 util.format when
-there is no "tail" arguments, 
+Whilst non-tailing case is slightly around a third slower with util.format,
+the tailing case is 3x faster.
 
 ```
-util*50000: 112.749ms
-quick*50000: 118.393ms
-utilWithTailObj*50000: 517.232ms
-quickWithTailObj*50000: 141.821ms
-util*50000: 111.217ms
-quick*50000: 117.432ms
-utilWithTailObj*50000: 504.271ms
-quickWithTailObj*50000: 142.759ms
+util*100000: 213.905ms
+quick*100000: 301.262ms
+utilWithTailObj*100000: 999.734ms
+quickWithTailObj*100000: 360.216ms
+util*100000: 223.177ms
+quick*100000: 307.062ms
+utilWithTailObj*100000: 998.736ms
+quickWithTailObj*100000: 361.509ms
 ```
 
 ## Acknowledgements

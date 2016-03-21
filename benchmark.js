@@ -2,6 +2,10 @@ var bench = require('fastbench')
 var utilFormat = require('util').format
 var quickFormat = require('./')
 
+Function.prototype.toJSON = function () { 
+  return '[Function' + (this.name ? ': ' + this.name : '') + ']'
+}
+
 var run = bench([
   function util(cb) {
     utilFormat('%s %j %d', 'a', {a: {x: 1}}, 1)

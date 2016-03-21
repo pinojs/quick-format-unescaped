@@ -12,5 +12,9 @@
   "author": "David Mark Clements",
   "devDependencies": {
     "fastbench": "^1.0.1"
+  },
+  "dependencies": {
+    "fast-safe-stringify": "^1.0.4",
+    "json-stringify-safe": "^5.0.1"
   }
 }

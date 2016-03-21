@@ -1,10 +1,4 @@
-var ss = function tryStringify(arg) {
-  try {
-    return JSON.stringify(arg)
-  } catch (_) {
-    return '[Circular]'
-  }
-}
+var ss = require('fast-safe-stringify')
 
 module.exports = function format(args) {
   var f = args[0]
@@ -77,5 +71,3 @@ module.exports = function format(args) {
 
   return str
 }
-
-
