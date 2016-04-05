@@ -46,7 +46,8 @@ module.exports = function format(args, opts) {
             break
           if (lastPos < i)
             str += f.slice(lastPos, i)
-          str += String(args[a++])
+          x = JSON.stringify(String(args[a++]))
+          str += x.substr(1, x.length - 2)
           lastPos = i = i + 2
           break
         case 37: // '%'
