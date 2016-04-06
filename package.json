@@ -14,6 +14,6 @@
     "fastbench": "^1.0.1"
   },
   "dependencies": {
-    "fast-safe-stringify": "^1.0.4"
+    "fast-safe-stringify": "^1.0.8"
   }
 }
