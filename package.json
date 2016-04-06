@@ -15,5 +15,14 @@
   },
   "dependencies": {
     "fast-safe-stringify": "^1.0.4"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/davidmarkclements/quick-format/issues"
+  },
+  "homepage": "https://github.com/davidmarkclements/quick-format#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidmarkclements/quick-format.git"
   }
 }
