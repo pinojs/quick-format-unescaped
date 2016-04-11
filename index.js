@@ -29,7 +29,8 @@ module.exports = function format(args, opts) {
             break
           if (lastPos < i)
             str += f.slice(lastPos, i)
-          str += Number(args[a++])
+          if (args[a] == null)  break
+          str += Number(args[a])
           lastPos = i = i + 2
           break
         case 106: // 'j'
@@ -37,7 +38,8 @@ module.exports = function format(args, opts) {
             break
           if (lastPos < i)
             str += f.slice(lastPos, i)
-          x = JSON.stringify(ss(args[a++]))
+          if (args[a] === undefined) break
+          x = JSON.stringify(ss(args[a]))
           str += x.substr(1, x.length - 2)
           lastPos = i = i + 2
           break
@@ -46,7 +48,7 @@ module.exports = function format(args, opts) {
             break
           if (lastPos < i)
             str += f.slice(lastPos, i)
-          x = JSON.stringify(String(args[a++]))
+          x = JSON.stringify(String(args[a]))
           str += x.substr(1, x.length - 2)
           lastPos = i = i + 2
           break
@@ -57,6 +59,7 @@ module.exports = function format(args, opts) {
           lastPos = i = i + 2
           break
       }
+      ++a
     }
     ++i
   }
