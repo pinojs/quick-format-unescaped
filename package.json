@@ -1,7 +1,7 @@
 {
   "name": "quick-format",
   "version": "2.0.4",
-  "description": "",
+  "description": "Solves a problem with util.format",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -15,5 +15,15 @@
   },
   "dependencies": {
     "fast-safe-stringify": "^1.0.8"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidmarkclements/quick-format.git"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/davidmarkclements/quick-format/issues"
+  },
+  "homepage": "https://github.com/davidmarkclements/quick-format#readme"
 }
