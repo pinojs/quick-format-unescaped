@@ -1,6 +1,11 @@
-# quick format
+# quick format unescaped
 
 Solves a problem with util.format
+
+## unescaped ?
+
+Sometimes you want to embed the results of quick-format into another string, 
+and then escape the whole string. 
 
 ## usage
 
