@@ -2,6 +2,7 @@ var safeStringify = require('fast-safe-stringify')
 function tryStringify (o) {
   try { return JSON.stringify(o) } catch(e) { return '"[Circular]"' }
 }
+
 module.exports = function format(args, opts) {
   var ss = (opts && opts.lowres) ? tryStringify : safeStringify
   var f = args[0]
@@ -33,12 +34,25 @@ module.exports = function format(args, opts) {
           str += Number(args[a])
           lastPos = i = i + 2
           break
+        case 79: // 'O'
+        case 111: // 'o'
         case 106: // 'j'
           if (a >= argLen)
             break
           if (lastPos < i)
             str += f.slice(lastPos, i)
           if (args[a] === undefined) break
+          var type = typeof args[a]
+          if (type === 'string') {
+            str += '\'' + args[a] + '\''
+            lastPos = i = i + 2
+            break
+          }
+          if (type === 'function') {
+            str += args[a].name || '<anonymous>'
+            lastPos = i = i + 2
+            break
+          }
           x = JSON.stringify(ss(args[a]))
           str += x.substr(1, x.length - 2)
           lastPos = i = i + 2
