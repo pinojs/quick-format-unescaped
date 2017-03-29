@@ -7,7 +7,7 @@ module.exports = function format(args, opts) {
   var ss = (opts && opts.lowres) ? tryStringify : safeStringify
   var f = args[0]
   if (typeof f !== 'string') {
-    const objects = new Array(args.length)
+    var objects = new Array(args.length)
     for (var index = 0; index < args.length; index++) {
       objects[index] = ss(args[index])
     }
