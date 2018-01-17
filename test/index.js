@@ -44,7 +44,7 @@ assert.equal(format(['%j', null]), 'null');
 // assert.equal(format(['%s', '42']), '42');
 // assert.equal(format(['%j', '42']), '"42"');
 
-// assert.equal(format(['%%s%s', 'foo']), '%sfoo');
+assert.equal(format(['%%s%s', 'foo']), '%sfoo');
 
 // assert.equal(format(['%s']), '%s');
 // assert.equal(format(['%s', undefined]), 'undefined');
