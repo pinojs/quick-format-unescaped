@@ -49,6 +49,8 @@ assert.equal(format(['%j', null]), 'null');
 // assert.equal(format(['%s']), '%s');
 // assert.equal(format(['%s', undefined]), 'undefined');
 // assert.equal(format(['%s', 'foo']), 'foo');
+assert.equal(format(['%s', '\"quoted\"']), '\"quoted\"');
+assert.equal(format(['%j', { s: '\"quoted\"' }]), '{\"s\":\"\\"quoted\\"\"}');
 // assert.equal(format(['%s:%s']), '%s:%s');
 // assert.equal(format(['%s:%s', undefined]), 'undefined:%s');
 // assert.equal(format(['%s:%s', 'foo']), 'foo:%s');
