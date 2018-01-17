@@ -53,8 +53,7 @@ module.exports = function format(args, opts) {
             lastPos = i = i + 2
             break
           }
-          x = JSON.stringify(ss(args[a]))
-          str += x.substr(1, x.length - 2)
+          str += ss(args[a])
           lastPos = i = i + 2
           break
         case 115: // 's'
@@ -62,8 +61,7 @@ module.exports = function format(args, opts) {
             break
           if (lastPos < i)
             str += f.slice(lastPos, i)
-          x = JSON.stringify(String(args[a]))
-          str += x.substr(1, x.length - 2)
+          str += String(args[a])
           lastPos = i = i + 2
           break
         case 37: // '%'
