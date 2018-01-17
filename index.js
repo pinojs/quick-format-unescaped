@@ -31,7 +31,7 @@ module.exports = function format(args, opts) {
             str += f.slice(lastPos, i)
           if (args[a] == null)  break
           str += Number(args[a])
-          lastPos = i = i + 2
+          lastPos = i + 2
           break
         case 79: // 'O'
         case 111: // 'o'
@@ -44,17 +44,17 @@ module.exports = function format(args, opts) {
           var type = typeof args[a]
           if (type === 'string') {
             str += '\'' + args[a] + '\''
-            lastPos = i = i + 2
+            lastPos = i + 2
             break
           }
           if (type === 'function') {
             str += args[a].name || '<anonymous>'
-            lastPos = i = i + 2
+            lastPos = i + 2
             break
           }
           x = JSON.stringify(ss(args[a]))
           str += x.substr(1, x.length - 2)
-          lastPos = i = i + 2
+          lastPos = i + 2
           break
         case 115: // 's'
           if (a >= argLen)
@@ -63,16 +63,18 @@ module.exports = function format(args, opts) {
             str += f.slice(lastPos, i)
           x = JSON.stringify(String(args[a]))
           str += x.substr(1, x.length - 2)
-          lastPos = i = i + 2
+          lastPos = i + 2
           break
         case 37: // '%'
           if (lastPos < i)
             str += f.slice(lastPos, i)
           str += '%'
-          lastPos = i = i + 2
+          --a
+          lastPos = i + 2
           break
       }
       ++a
+      ++i
     }
     ++i
   }
