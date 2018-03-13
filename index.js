@@ -8,6 +8,10 @@ module.exports = function format(args, opts) {
   if (typeof f !== 'string') {
     const objects = new Array(args.length)
     for (var index = 0; index < args.length; index++) {
+      if (args[index] instanceof Error) {
+        objects[index] = args[index].stack
+        continue
+      }
       objects[index] = ss(args[index])
     }
     return objects.join(' ')
