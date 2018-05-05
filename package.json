@@ -14,7 +14,7 @@
     "fastbench": "^1.0.1"
   },
   "dependencies": {
-    "fast-safe-stringify": "^1.0.8"
+    "fast-safe-stringify": "^2.0.4"
   },
   "repository": {
     "type": "git",
