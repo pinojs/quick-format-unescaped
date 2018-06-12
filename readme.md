@@ -1,6 +1,4 @@
-# quick format unescaped
-
-Solves a problem with util.format
+# quick-format-unescaped
 
 ## unescaped ?
 
@@ -11,62 +9,50 @@ and then escape the whole string.
 
 ```js
 var format = require('quick-format')
-var options = {lowres: false} // <--default
-format(['hello %s %j %d', 'world', {obj: true}, 4, {another: 'obj'}], options)
+format('hello %s %j %d', 'world', [{obj: true}, 4, {another: 'obj'}])
 ```
 
 ## options
 
-### lowres
+### stringify
 
-Passing an options object with `lowres: true` will cause quick-format any object with a circular as a string with the value '"[Circular]"'. The default behaviour is to label
-circular references in an object, instead of abandoning the entire object. Naturally, 
-`lowres` is a faster mode, and assumes you have made the decision to ensure the objects
-you're passing have no circular references.
+Passing an options object as the third parameter with a `stringify` will mean 
+any objects will be passed to the supplied function instead of an the 
+internal `tryStringify` function. This can be useful when using augmented
+capability serializers such as [`fast-safe-stringify`](http://github.com/davidmarkclements/fast-safe-stringify) or [`fast-redact`](http://github.com/davidmarkclements/fast-redact).  
 
 ## caveats
 
-We use `JSON.stringify` instead of `util.inspect`, this means object
-methods (functions) *will not be serialized*.
-
-##  util.format
-
-In `util.format` for Node 5.9, performance is significantly affected
-when we pass in more arguments than interpolation characters, e.g
-
-```js
-util.format('hello %s %j %d', 'world', {obj: true}, 4, {another: 'obj'})
-```
-
-This is mostly due to the use of `util.inspect`. Use `JSON.stringify`
-(safely) instead which is significantly faster. 
-
-It also takes an array instead of arguments, which helps us 
-avoid the use of `apply` in some cases.
-
-Also - for speed purposes, we ignore symbol.
+By default `quick-format-unescaped` uses  `JSON.stringify` instead of `util.inspect`, this means functions *will not be serialized*.
 
 ## Benchmarks
 
-Whilst exact matching of objects to interpolation characters is slower,
-the case of additional objects is 3x faster. Further, using `lowres` mode
-brings us closer to `util.inspect` speeds.
+### Node 8.11.2
 
 ```
-util*100000: 205.978ms
-quickLowres*100000: 236.337ms
-quick*100000: 292.018ms
-utilWithTailObj*100000: 1054.592ms
-quickWithTailObjLowres*100000: 267.992ms
-quickWithTailObj*100000: 343.048ms
-util*100000: 212.011ms
-quickLowres*100000: 226.441ms
-quick*100000: 296.600ms
-utilWithTailObj*100000: 1020.195ms
-quickWithTailObjLowres*100000: 267.331ms
-quickWithTailObj*100000: 343.867ms
+util*100000: 350.325ms
+quick*100000: 268.141ms
+utilWithTailObj*100000: 586.387ms
+quickWithTailObj*100000: 280.200ms
+util*100000: 325.735ms
+quick*100000: 270.251ms
+utilWithTailObj*100000: 492.270ms
+quickWithTailObj*100000: 261.797ms
+```
+
+### Node 10.4.0
+
+```
+util*100000: 301.035ms
+quick*100000: 217.005ms
+utilWithTailObj*100000: 404.778ms
+quickWithTailObj*100000: 236.176ms
+util*100000: 286.349ms
+quick*100000: 214.646ms
+utilWithTailObj*100000: 388.574ms
+quickWithTailObj*100000: 226.036ms
 ```
 
 ## Acknowledgements
 
-Sponsored by nearForm
+Sponsored by [nearForm](http://www.nearform.com)

@@ -3,23 +3,30 @@ function tryStringify (o) {
   try { return JSON.stringify(o) } catch(e) { return '"[Circular]"' }
 }
 
-module.exports = function format(args, opts) {
+module.exports = format 
+
+function format(f, args, opts) {
   var ss = (opts && opts.stringify) || tryStringify
-  var f = args[0]
-  if (typeof f !== 'string') {
-    var objects = new Array(args.length)
-    for (var index = 0; index < args.length; index++) {
+  var offset = 1
+  if (f === null) {
+    f = args[0]
+    offset = 0
+  }
+  if (typeof f === 'object' && f !== null) {
+    var len = args.length + offset
+    if (len === 1) return f
+    var objects = new Array(len)
+    objects[0] = ss(f)
+    for (var index = 1; index < len; index++) {
       objects[index] = ss(args[index])
     }
     return objects.join(' ')
   }
-
   var argLen = args.length
-
-  if (argLen === 1) return f
+  if (argLen === 0) return f
   var x = ''
   var str = ''
-  var a = 1
+  var a = 1 - offset
   var lastPos = 0
   var flen = f.length
   for (var i = 0; i < flen;) {
