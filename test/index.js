@@ -24,38 +24,38 @@ const format = require('../');
 // //   format(['%d', symbol]);
 // // }, TypeError);
 
-// assert.equal(format(['%d', 42.0]), '42');
-// assert.equal(format(['%d', 42]), '42');
-// assert.equal(format(['%s', 42]), '42');
-// assert.equal(format(['%j', 42]), '42');
+assert.equal(format('%d', [42.0]), '42');
+assert.equal(format('%d', [42]), '42');
+assert.equal(format('%s', [42]), '42');
+assert.equal(format('%j', [42]), '42');
 
-assert.equal(format(['%d', undefined]), '%d');
-assert.equal(format(['%s', undefined]), 'undefined');
-assert.equal(format(['%j', undefined]), '%j');
-
-
-assert.equal(format(['%d', null]), '%d');
-assert.equal(format(['%s', null]), 'null');
-assert.equal(format(['%j', null]), 'null');
+assert.equal(format('%d', [undefined]), '%d');
+assert.equal(format('%s', [undefined]), 'undefined');
+assert.equal(format('%j', [undefined]), '%j');
 
 
-// assert.equal(format(['%d', '42.0']), '42');
-// assert.equal(format(['%d', '42']), '42');
-// assert.equal(format(['%s', '42']), '42');
-// assert.equal(format(['%j', '42']), '"42"');
+assert.equal(format('%d', [null]), '%d');
+assert.equal(format('%s', [null]), 'null');
+assert.equal(format('%j', [null]), 'null');
 
-// assert.equal(format(['%%s%s', 'foo']), '%sfoo');
 
-// assert.equal(format(['%s']), '%s');
-// assert.equal(format(['%s', undefined]), 'undefined');
-// assert.equal(format(['%s', 'foo']), 'foo');
-assert.equal(format(['%s', '\"quoted\"']), '\"quoted\"');
-assert.equal(format(['%j', { s: '\"quoted\"' }]), '{\"s\":\"\\"quoted\\"\"}');
-// assert.equal(format(['%s:%s']), '%s:%s');
-// assert.equal(format(['%s:%s', undefined]), 'undefined:%s');
-// assert.equal(format(['%s:%s', 'foo']), 'foo:%s');
-// assert.equal(format(['%s:%s', 'foo', 'bar']), 'foo:bar');
-// assert.equal(format(['%s:%s', 'foo', 'bar', 'baz']), 'foo:bar baz');
+assert.equal(format('%d', ['42.0']), '42');
+assert.equal(format('%d', ['42']), '42');
+assert.equal(format('%s', ['42']), '42');
+// assert.equal(format('%j', ['42']), '"42"');
+
+// assert.equal(format('%%s%s', ['foo']), '%sfoo');
+
+assert.equal(format('%s', []), '%s');
+assert.equal(format('%s', [undefined]), 'undefined');
+assert.equal(format('%s', ['foo']), 'foo');
+assert.equal(format('%s', ['\"quoted\"']), '\"quoted\"');
+assert.equal(format('%j', [{ s: '\"quoted\"' }]), '{\"s\":\"\\"quoted\\"\"}');
+assert.equal(format('%s:%s', []), '%s:%s');
+assert.equal(format('%s:%s', [undefined]), 'undefined:%s');
+assert.equal(format('%s:%s', ['foo']), 'foo:%s');
+assert.equal(format('%s:%s', ['foo', 'bar']), 'foo:bar');
+assert.equal(format('%s:%s', ['foo', 'bar', 'baz']), 'foo:bar baz');
 // // assert.equal(format(['%%%s%%', 'hi']), '%hi%');
 // // assert.equal(format(['%%%s%%%%', 'hi']), '%hi%%');
 
