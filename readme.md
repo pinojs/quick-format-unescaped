@@ -8,7 +8,7 @@ and then escape the whole string.
 ## usage
 
 ```js
-var format = require('quick-format')
+var format = require('quick-format-unescaped')
 format('hello %s %j %d', 'world', [{obj: true}, 4, {another: 'obj'}])
 ```
 
