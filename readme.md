@@ -9,12 +9,20 @@ and then escape the whole string.
 
 ```js
 var format = require('quick-format-unescaped')
-format('hello %s %j %d', 'world', [{obj: true}, 4, {another: 'obj'}])
+format('hello %s %j %d', ['world', [{obj: true}, 4, {another: 'obj'}]])
 ```
 
-## options
+## format(fmt, parameters, [options])
 
-### stringify
+### fmt
+
+A `printf`-like format string. Example: `'hello %s %j %d'`
+
+### parameters
+
+Array of values to be inserted into the `format` string. Example: `['world', {obj:true}]`
+
+### options.stringify
 
 Passing an options object as the third parameter with a `stringify` will mean 
 any objects will be passed to the supplied function instead of an the 
