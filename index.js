@@ -52,16 +52,19 @@ function format(f, args, opts) {
           var type = typeof args[a]
           if (type === 'string') {
             str += '\'' + args[a] + '\''
-            lastPos = i = i + 2
+            lastPos = i + 2
+            i++
             break
           }
           if (type === 'function') {
             str += args[a].name || '<anonymous>'
-            lastPos = i = i + 2
+            lastPos = i + 2
+            i++
             break
           }
           str += ss(args[a])
-          lastPos = i = i + 2
+          lastPos = i + 2
+          i++
           break
         case 115: // 's'
           if (a >= argLen)
@@ -69,13 +72,15 @@ function format(f, args, opts) {
           if (lastPos < i)
             str += f.slice(lastPos, i)
           str += String(args[a])
-          lastPos = i = i + 2
+          lastPos = i + 2
+          i++
           break
         case 37: // '%'
           if (lastPos < i)
             str += f.slice(lastPos, i)
           str += '%'
-          lastPos = i = i + 2
+          lastPos = i + 2
+          i++
           break
       }
       ++a
