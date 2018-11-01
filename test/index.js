@@ -56,6 +56,11 @@ assert.equal(format('%s:%s', [undefined]), 'undefined:%s');
 assert.equal(format('%s:%s', ['foo']), 'foo:%s');
 assert.equal(format('%s:%s', ['foo', 'bar']), 'foo:bar');
 assert.equal(format('%s:%s', ['foo', 'bar', 'baz']), 'foo:bar baz');
+assert.equal(format('%s%s', []), '%s%s');
+assert.equal(format('%s%s', [undefined]), 'undefined%s');
+assert.equal(format('%s%s', ['foo']), 'foo%s');
+assert.equal(format('%s%s', ['foo', 'bar']), 'foobar');
+assert.equal(format('%s%s', ['foo', 'bar', 'baz']), 'foobar baz');
 // // assert.equal(format(['%%%s%%', 'hi']), '%hi%');
 // // assert.equal(format(['%%%s%%%%', 'hi']), '%hi%%');
 
