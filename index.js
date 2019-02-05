@@ -28,7 +28,7 @@ function format(f, args, opts) {
   var str = ''
   var a = 1 - offset
   var lastPos = 0
-  var flen = f.length
+  var flen = (f && f.length) || 0
   for (var i = 0; i < flen;) {
     if (f.charCodeAt(i) === 37 && i + 1 < flen) {
       switch (f.charCodeAt(i + 1)) {
