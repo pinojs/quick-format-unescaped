@@ -1,6 +1,8 @@
 'use strict';
 const assert = require('assert');
 const format = require('../');
+const util = require('util');
+
 // const symbol = Symbol('foo');
 
 // assert.equal(format([]), '');
@@ -67,6 +69,7 @@ assert.equal(format(null, ['foo', undefined, 'bar']), 'foo undefined bar');
 
 assert.equal(format(null, [null, 'foo']), 'null foo');
 assert.equal(format(null, [undefined, 'foo']), 'undefined foo');
+assert.equal(format(), util.format());
 
 // // assert.equal(format(['%%%s%%', 'hi']), '%hi%');
 // // assert.equal(format(['%%%s%%%%', 'hi']), '%hi%%');

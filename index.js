@@ -22,8 +22,8 @@ function format(f, args, opts) {
     }
     return objects.join(' ')
   }
-  var argLen = args.length
-  if (argLen === 0) return f
+  var argLen = args ? args.length : 0
+  if (argLen === 0) return f === undefined ? '' : f
   var x = ''
   var str = ''
   var a = 1 - offset
