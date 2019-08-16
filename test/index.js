@@ -1,7 +1,6 @@
 'use strict';
 const assert = require('assert');
 const format = require('../');
-// const symbol = Symbol('foo');
 
 // assert.equal(format([]), '');
 // assert.equal(format(['']), '');
@@ -15,14 +14,15 @@ const format = require('../');
 // // // CHECKME this is for console.log() compatibility - but is it *right*?
 // assert.equal(format(['foo', 'bar', 'baz']), 'foo bar baz');
 
-// // ES6 Symbol handling
-// // assert.equal(format([symbol]), 'Symbol(foo)');
-// // assert.equal(format(['foo', symbol]), 'foo Symbol(foo)');
-// // assert.equal(format(['%s', symbol]), 'Symbol(foo)');
-// // assert.equal(format(['%j', symbol]), 'undefined');
-// // assert.throws(function() {
-// //   format(['%d', symbol]);
-// // }, TypeError);
+// ES6 Symbol handling
+const symbol = Symbol('foo')
+assert.equal(format(null, [symbol]), symbol);
+assert.equal(format('foo', [symbol]), 'foo Symbol(foo)');
+assert.equal(format('%s', [symbol]), 'Symbol(foo)');
+assert.equal(format('%j', [symbol]), 'undefined');
+assert.throws(function() {
+  format(['%d', symbol]);
+}, TypeError);
 
 assert.equal(format('%d', [42.0]), '42');
 assert.equal(format('%d', [42]), '42');
