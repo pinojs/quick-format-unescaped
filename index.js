@@ -95,7 +95,7 @@ function format(f, args, opts) {
   while (a < argLen) {
     x = args[a++]
     if (x === null || (typeof x !== 'object')) {
-      str += ' ' + x
+      str += ' ' + String(x)
     } else {
       str += ' ' + ss(x)
     }
