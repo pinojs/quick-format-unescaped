@@ -30,6 +30,7 @@ function format(f, args, opts) {
   var flen = (f && f.length) || 0
   for (var i = 0; i < flen;) {
     if (f.charCodeAt(i) === 37 && i + 1 < flen) {
+      lastPos = lastPos > -1 ? lastPos : 0
       switch (f.charCodeAt(i + 1)) {
         case 100: // 'd'
           if (a >= argLen)

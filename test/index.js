@@ -62,6 +62,9 @@ assert.equal(format('%s%s', ['foo']), 'foo%s');
 assert.equal(format('%s%s', ['foo', 'bar']), 'foobar');
 assert.equal(format('%s%s', ['foo', 'bar', 'baz']), 'foobar baz');
 
+assert.equal(format('foo %s', ['foo']), 'foo foo')
+assert.equal(format('foo %j', [{foo: 'foo'}]), 'foo {"foo":"foo"}')
+
 // // assert.equal(format(['%%%s%%', 'hi']), '%hi%');
 // // assert.equal(format(['%%%s%%%%', 'hi']), '%hi%%');
 
