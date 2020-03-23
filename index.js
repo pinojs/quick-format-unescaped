@@ -3,14 +3,13 @@ function tryStringify (o) {
   try { return JSON.stringify(o) } catch(e) { return '"[Circular]"' }
 }
 
-module.exports = format 
+module.exports = format
 
 function format(f, args, opts) {
   var ss = (opts && opts.stringify) || tryStringify
   var offset = 1
-  if (f === null) {
-    f = args[0]
-    offset = 0
+  if (typeof f !== 'string') {
+    return f
   }
   if (typeof f === 'object' && f !== null) {
     var len = args.length + offset
@@ -27,7 +26,7 @@ function format(f, args, opts) {
   var x = ''
   var str = ''
   var a = 1 - offset
-  var lastPos = 0
+  var lastPos = -1
   var flen = (f && f.length) || 0
   for (var i = 0; i < flen;) {
     if (f.charCodeAt(i) === 37 && i + 1 < flen) {
@@ -87,8 +86,8 @@ function format(f, args, opts) {
     }
     ++i
   }
-  if (lastPos === 0)
-    str = f
+  if (lastPos === -1)
+    return f
   else if (lastPos < flen) {
     str += f.slice(lastPos)
   }

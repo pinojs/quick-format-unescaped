@@ -16,12 +16,12 @@ const format = require('../');
 
 // ES6 Symbol handling
 const symbol = Symbol('foo')
-assert.equal(format(null, [symbol]), symbol);
-assert.equal(format('foo', [symbol]), 'foo Symbol(foo)');
+assert.equal(format(null, [symbol]), null);
+assert.equal(format('foo', [symbol]), 'foo');
 assert.equal(format('%s', [symbol]), 'Symbol(foo)');
 assert.equal(format('%j', [symbol]), 'undefined');
 assert.throws(function() {
-  format(['%d', symbol]);
+  format('%d', [symbol]);
 }, TypeError);
 
 assert.equal(format('%d', [42.0]), '42');
@@ -61,12 +61,6 @@ assert.equal(format('%s%s', [undefined]), 'undefined%s');
 assert.equal(format('%s%s', ['foo']), 'foo%s');
 assert.equal(format('%s%s', ['foo', 'bar']), 'foobar');
 assert.equal(format('%s%s', ['foo', 'bar', 'baz']), 'foobar baz');
-
-assert.equal(format(null, ['foo', null, 'bar']), 'foo null bar');
-assert.equal(format(null, ['foo', undefined, 'bar']), 'foo undefined bar');
-
-assert.equal(format(null, [null, 'foo']), 'null foo');
-assert.equal(format(null, [undefined, 'foo']), 'undefined foo');
 
 // // assert.equal(format(['%%%s%%', 'hi']), '%hi%');
 // // assert.equal(format(['%%%s%%%%', 'hi']), '%hi%%');
