@@ -8,9 +8,6 @@ module.exports = format
 function format(f, args, opts) {
   var ss = (opts && opts.stringify) || tryStringify
   var offset = 1
-  if (typeof f !== 'string') {
-    return f
-  }
   if (typeof f === 'object' && f !== null) {
     var len = args.length + offset
     if (len === 1) return f
@@ -20,6 +17,9 @@ function format(f, args, opts) {
       objects[index] = ss(args[index])
     }
     return objects.join(' ')
+  }
+  if (typeof f !== 'string') {
+    return f
   }
   var argLen = args.length
   if (argLen === 0) return f
@@ -91,14 +91,6 @@ function format(f, args, opts) {
     return f
   else if (lastPos < flen) {
     str += f.slice(lastPos)
-  }
-  while (a < argLen) {
-    x = args[a++]
-    if (x === null || (typeof x !== 'object')) {
-      str += ' ' + String(x)
-    } else {
-      str += ' ' + ss(x)
-    }
   }
 
   return str

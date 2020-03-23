@@ -7,11 +7,13 @@
     "test": "test"
   },
   "scripts": {
-    "test": "node test"
+    "test": "nyc -- node test",
+    "test:html": "nyc --reporter=html -- node test"
   },
   "author": "David Mark Clements",
   "devDependencies": {
-    "fastbench": "^1.0.1"
+    "fastbench": "^1.0.1",
+    "nyc": "^15.0.0"
   },
   "dependencies": {},
   "repository": {
