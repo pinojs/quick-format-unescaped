@@ -98,3 +98,4 @@ assert.equal(format('foo %j', [circularObject]), 'foo "[Circular]"')
 
 assert.equal(format('%%', ['foo']), '%')
 assert.equal(format('foo %%', ['foo']), 'foo %')
+assert.equal(format('foo %% %s', ['bar']), 'foo % bar')
