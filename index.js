@@ -23,7 +23,6 @@ function format(f, args, opts) {
   }
   var argLen = args.length
   if (argLen === 0) return f
-  var x = ''
   var str = ''
   var a = 1 - offset
   var lastPos = -1
@@ -33,12 +32,22 @@ function format(f, args, opts) {
       lastPos = lastPos > -1 ? lastPos : 0
       switch (f.charCodeAt(i + 1)) {
         case 100: // 'd'
+        case 102: // 'f'
           if (a >= argLen)
             break
           if (lastPos < i)
             str += f.slice(lastPos, i)
           if (args[a] == null)  break
           str += Number(args[a])
+          lastPos = i = i + 2
+          break
+        case 105: // 'i'
+          if (a >= argLen)
+            break
+          if (lastPos < i)
+            str += f.slice(lastPos, i)
+          if (args[a] == null)  break
+          str += Math.floor(Number(args[a]))
           lastPos = i = i + 2
           break
         case 79: // 'O'
