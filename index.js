@@ -90,6 +90,7 @@ function format(f, args, opts) {
           str += '%'
           lastPos = i + 2
           i++
+          a--
           break
       }
       ++a
