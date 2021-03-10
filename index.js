@@ -18,11 +18,12 @@ function format(f, args, opts) {
     }
     return objects.join(' ')
   }
+
   if (typeof f !== 'string') {
     return f
   }
-  var argLen = args.length
-  if (argLen === 0) return f
+  var argLen = args ? args.length : 0
+  if (argLen === 0) return f === undefined ? '' : f
   var str = ''
   var a = 1 - offset
   var lastPos = -1
