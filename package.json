@@ -1,17 +1,19 @@
 {
   "name": "quick-format-unescaped",
-  "version": "3.0.2",
+  "version": "4.0.1",
   "description": "Solves a problem with util.format",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "node test"
+    "test": "nyc -- node test",
+    "test:html": "nyc --reporter=html -- node test"
   },
   "author": "David Mark Clements",
   "devDependencies": {
-    "fastbench": "^1.0.1"
+    "fastbench": "^1.0.1",
+    "nyc": "^15.0.0"
   },
   "dependencies": {},
   "repository": {

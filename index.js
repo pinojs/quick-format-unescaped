@@ -3,15 +3,11 @@ function tryStringify (o) {
   try { return JSON.stringify(o) } catch(e) { return '"[Circular]"' }
 }
 
-module.exports = format 
+module.exports = format
 
 function format(f, args, opts) {
   var ss = (opts && opts.stringify) || tryStringify
   var offset = 1
-  if (f === null) {
-    f = args[0]
-    offset = 0
-  }
   if (typeof f === 'object' && f !== null) {
     var len = args.length + offset
     if (len === 1) return f
@@ -22,23 +18,37 @@ function format(f, args, opts) {
     }
     return objects.join(' ')
   }
+
+  if (typeof f !== 'string') {
+    return f
+  }
   var argLen = args ? args.length : 0
   if (argLen === 0) return f === undefined ? '' : f
-  var x = ''
   var str = ''
   var a = 1 - offset
-  var lastPos = 0
+  var lastPos = -1
   var flen = (f && f.length) || 0
   for (var i = 0; i < flen;) {
     if (f.charCodeAt(i) === 37 && i + 1 < flen) {
+      lastPos = lastPos > -1 ? lastPos : 0
       switch (f.charCodeAt(i + 1)) {
         case 100: // 'd'
+        case 102: // 'f'
           if (a >= argLen)
             break
           if (lastPos < i)
             str += f.slice(lastPos, i)
           if (args[a] == null)  break
           str += Number(args[a])
+          lastPos = i = i + 2
+          break
+        case 105: // 'i'
+          if (a >= argLen)
+            break
+          if (lastPos < i)
+            str += f.slice(lastPos, i)
+          if (args[a] == null)  break
+          str += Math.floor(Number(args[a]))
           lastPos = i = i + 2
           break
         case 79: // 'O'
@@ -81,24 +91,17 @@ function format(f, args, opts) {
           str += '%'
           lastPos = i + 2
           i++
+          a--
           break
       }
       ++a
     }
     ++i
   }
-  if (lastPos === 0)
-    str = f
+  if (lastPos === -1)
+    return f
   else if (lastPos < flen) {
     str += f.slice(lastPos)
-  }
-  while (a < argLen) {
-    x = args[a++]
-    if (x === null || (typeof x !== 'object')) {
-      str += ' ' + x
-    } else {
-      str += ' ' + ss(x)
-    }
   }
 
   return str
