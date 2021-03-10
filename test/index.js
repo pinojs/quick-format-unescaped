@@ -1,5 +1,5 @@
 'use strict';
-const assert = require('assert');
+const assert = require('assert').strict;
 const format = require('../');
 const util = require('util');
 
@@ -83,8 +83,8 @@ assert.equal(format('%s%s', ['foo', 'bar', 'baz']), 'foobar');
 assert.equal(format('foo %s', ['foo']), 'foo foo')
 
 
-assert.equal(format(null, [null, 'foo']), 'null foo');
-assert.equal(format(null, [undefined, 'foo']), 'undefined foo');
+assert.equal(format(null, [null, 'foo']), null);
+assert.equal(format(null, [undefined, 'foo']), null);
 assert.equal(format(), util.format());
 assert.equal(format('foo %o', [{foo: 'foo'}]), 'foo {"foo":"foo"}')
 assert.equal(format('foo %O', [{foo: 'foo'}]), 'foo {"foo":"foo"}')

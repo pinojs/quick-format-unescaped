@@ -19,9 +19,6 @@ function format(f, args, opts) {
     return objects.join(' ')
   }
 
-  if (typeof f !== 'string') {
-    return f
-  }
   var argLen = args ? args.length : 0
   if (argLen === 0) return f === undefined ? '' : f
   var str = ''
