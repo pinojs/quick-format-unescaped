@@ -31,6 +31,8 @@ assert.throws(function() {
 
 assert.equal(format('%d', [42.0]), '42');
 assert.equal(format('%d', [42]), '42');
+assert.equal(format('%f', [42.99]), '42.99');
+assert.equal(format('%i', [42.99]), '42');
 assert.equal(format('%s', [42]), '42');
 assert.equal(format('%j', [42]), '42');
 
@@ -40,13 +42,19 @@ assert.equal(format('%j', [undefined]), '%j');
 
 
 assert.equal(format('%d', [null]), '%d');
+assert.equal(format('%i', [null]), '%i');
 assert.equal(format('%s', [null]), 'null');
 assert.equal(format('%j', [null]), 'null');
 
 
 assert.equal(format('%d', ['42.0']), '42');
 assert.equal(format('%d', ['42']), '42');
+assert.equal(format('%i', ['42']), '42');
+assert.equal(format('%i', ['42.99']), '42');
+assert.equal(format('%s %i', ['foo', 42.99]), 'foo 42');
 assert.equal(format('%d %d', ['42']), '42 %d');
+assert.equal(format('%i %i', ['42']), '42 %i');
+assert.equal(format('%i %i', ['42.99']), '42 %i');
 assert.equal(format('foo %d', ['42']), 'foo 42');
 assert.equal(format('%s', ['42']), '42');
 // assert.equal(format('%j', ['42']), '"42"');
