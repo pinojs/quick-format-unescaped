@@ -1,9 +1,6 @@
 'use strict';
 const assert = require('assert');
 const format = require('../');
-const util = require('util');
-
-// const symbol = Symbol('foo');
 
 // assert.equal(format([]), '');
 // assert.equal(format(['']), '');
@@ -82,10 +79,6 @@ assert.equal(format('%s%s', ['foo', 'bar', 'baz']), 'foobar');
 
 assert.equal(format('foo %s', ['foo']), 'foo foo')
 
-
-assert.equal(format(null, [null, 'foo']), 'null foo');
-assert.equal(format(null, [undefined, 'foo']), 'undefined foo');
-assert.equal(format(), util.format());
 assert.equal(format('foo %o', [{foo: 'foo'}]), 'foo {"foo":"foo"}')
 assert.equal(format('foo %O', [{foo: 'foo'}]), 'foo {"foo":"foo"}')
 assert.equal(format('foo %j', [{foo: 'foo'}]), 'foo {"foo":"foo"}')
@@ -101,7 +94,6 @@ assert.equal(
 const circularObject = {}
 circularObject.foo = circularObject
 assert.equal(format('foo %j', [circularObject]), 'foo "[Circular]"')
-
 
 // // assert.equal(format(['%%%s%%', 'hi']), '%hi%');
 // // assert.equal(format(['%%%s%%%%', 'hi']), '%hi%%');
