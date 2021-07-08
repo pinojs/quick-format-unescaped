@@ -35,18 +35,18 @@ function format(f, args, opts) {
         case 102: // 'f'
           if (a >= argLen)
             break
+          if (args[a] == null)  break
           if (lastPos < i)
             str += f.slice(lastPos, i)
-          if (args[a] == null)  break
           str += Number(args[a])
           lastPos = i = i + 2
           break
         case 105: // 'i'
           if (a >= argLen)
             break
+          if (args[a] == null)  break
           if (lastPos < i)
             str += f.slice(lastPos, i)
-          if (args[a] == null)  break
           str += Math.floor(Number(args[a]))
           lastPos = i = i + 2
           break
@@ -55,9 +55,9 @@ function format(f, args, opts) {
         case 106: // 'j'
           if (a >= argLen)
             break
+          if (args[a] === undefined) break
           if (lastPos < i)
             str += f.slice(lastPos, i)
-          if (args[a] === undefined) break
           var type = typeof args[a]
           if (type === 'string') {
             str += '\'' + args[a] + '\''
