@@ -39,7 +39,8 @@ function format(f, args, opts) {
           if (lastPos < i)
             str += f.slice(lastPos, i)
           str += Number(args[a])
-          lastPos = i = i + 2
+          lastPos = i + 2
+          i++
           break
         case 105: // 'i'
           if (a >= argLen)
@@ -48,7 +49,8 @@ function format(f, args, opts) {
           if (lastPos < i)
             str += f.slice(lastPos, i)
           str += Math.floor(Number(args[a]))
-          lastPos = i = i + 2
+          lastPos = i + 2
+          i++
           break
         case 79: // 'O'
         case 111: // 'o'
