@@ -1,6 +1,6 @@
 {
   "name": "quick-format-unescaped",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "Solves a problem with util.format",
   "main": "index.js",
   "directories": {
