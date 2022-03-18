@@ -2,14 +2,14 @@
 
 ## unescaped ?
 
-Sometimes you want to embed the results of quick-format into another string, 
-and then escape the whole string. 
+Sometimes you want to embed the results of quick-format into another string,
+and then escape the whole string.
 
 ## usage
 
 ```js
 var format = require('quick-format-unescaped')
-format('hello %s %j %d', ['world', [{obj: true}, 4, {another: 'obj'}]])
+format('hello %s %j %d', ['world', [{ obj: true }, 4, { another: 'obj' }]])
 ```
 
 ## format(fmt, parameters, [options])
@@ -24,14 +24,14 @@ Array of values to be inserted into the `format` string. Example: `['world', {ob
 
 ### options.stringify
 
-Passing an options object as the third parameter with a `stringify` will mean 
-any objects will be passed to the supplied function instead of an the 
+Passing an options object as the third parameter with a `stringify` will mean
+any objects will be passed to the supplied function instead of an the
 internal `tryStringify` function. This can be useful when using augmented
-capability serializers such as [`fast-safe-stringify`](http://github.com/davidmarkclements/fast-safe-stringify) or [`fast-redact`](http://github.com/davidmarkclements/fast-redact).  
+capability serializers such as [`fast-safe-stringify`](http://github.com/davidmarkclements/fast-safe-stringify) or [`fast-redact`](http://github.com/davidmarkclements/fast-redact).
 
 ## caveats
 
-By default `quick-format-unescaped` uses  `JSON.stringify` instead of `util.inspect`, this means functions *will not be serialized*.
+By default `quick-format-unescaped` uses `JSON.stringify` instead of `util.inspect`, this means functions _will not be serialized_.
 
 ## Benchmarks
 
@@ -59,6 +59,19 @@ util*100000: 286.349ms
 quick*100000: 214.646ms
 utilWithTailObj*100000: 388.574ms
 quickWithTailObj*100000: 226.036ms
+```
+
+Existing impl:
+
+```
+util*100000: 1.245s
+quick*100000: 1.212s
+utilWithTailObj*100000: 1.313s
+quickWithTailObj*100000: 1.217s
+util*100000: 1.229s
+quick*100000: 1.203s
+utilWithTailObj*100000: 1.308s
+quickWithTailObj*100000: 1.213s
 ```
 
 ## Acknowledgements

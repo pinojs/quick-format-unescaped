@@ -1,6 +1,6 @@
 var bench = require('fastbench')
 var utilFormat = require('util').format
-var quickFormat = require('./')
+var quickFormat = require('./')()
 
 var run = bench([
   function util(cb) {
