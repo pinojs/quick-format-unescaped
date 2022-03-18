@@ -8,8 +8,23 @@ and then escape the whole string.
 ## usage
 
 ```js
-var format = require('quick-format-unescaped')
+var format = require('quick-format-unescaped')()
 format('hello %s %j %d', ['world', [{ obj: true }, 4, { another: 'obj' }]])
+```
+
+To specify custom formatters, pass in `opt.formatters`:
+
+```js
+const build = require('quick-format-unescaped')
+const format = build({
+  formatters: {
+    // Pass in whatever % interpolator you want, as long as it's a single character;
+    // in this case, it's `t`.
+    // The formatter should be a function that takes in a value and returns the formatted value.
+    t: time => new Date(time).toLocaleString()
+  }
+})
+format('hello %s at %t', ['world', Date.now()])
 ```
 
 ## format(fmt, parameters, [options])
@@ -59,19 +74,6 @@ util*100000: 286.349ms
 quick*100000: 214.646ms
 utilWithTailObj*100000: 388.574ms
 quickWithTailObj*100000: 226.036ms
-```
-
-Existing impl:
-
-```
-util*100000: 1.245s
-quick*100000: 1.212s
-utilWithTailObj*100000: 1.313s
-quickWithTailObj*100000: 1.217s
-util*100000: 1.229s
-quick*100000: 1.203s
-utilWithTailObj*100000: 1.308s
-quickWithTailObj*100000: 1.213s
 ```
 
 ## Acknowledgements
