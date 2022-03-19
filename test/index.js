@@ -144,6 +144,9 @@ assert.equal(
 assert.equal(format('%d%%%d', [11, 22]), '11%22')
 assert.equal(format('%d%%%s', [11, 22]), '11%22')
 
+assert.throws(() => build({ formatters: { haha: () => 'Jonathan' } }))
+assert.throws(() => build({ formatters: { t: 'Jonathan' } }))
+
 const customFormatter = build({
   formatters: { t: ms => new Date(ms).toISOString() }
 })
