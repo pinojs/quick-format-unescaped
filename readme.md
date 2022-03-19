@@ -2,14 +2,29 @@
 
 ## unescaped ?
 
-Sometimes you want to embed the results of quick-format into another string, 
-and then escape the whole string. 
+Sometimes you want to embed the results of quick-format into another string,
+and then escape the whole string.
 
 ## usage
 
 ```js
-var format = require('quick-format-unescaped')
-format('hello %s %j %d', ['world', [{obj: true}, 4, {another: 'obj'}]])
+var format = require('quick-format-unescaped')()
+format('hello %s %j %d', ['world', [{ obj: true }, 4, { another: 'obj' }]])
+```
+
+To specify custom formatters, pass in `opt.formatters`:
+
+```js
+const build = require('quick-format-unescaped')
+const format = build({
+  formatters: {
+    // Pass in whatever % interpolator you want, as long as it's a single character;
+    // in this case, it's `t`.
+    // The formatter should be a function that takes in a value and returns the formatted value.
+    t: time => new Date(time).toLocaleString()
+  }
+})
+format('hello %s at %t', ['world', Date.now()])
 ```
 
 ## format(fmt, parameters, [options])
@@ -24,14 +39,14 @@ Array of values to be inserted into the `format` string. Example: `['world', {ob
 
 ### options.stringify
 
-Passing an options object as the third parameter with a `stringify` will mean 
-any objects will be passed to the supplied function instead of an the 
+Passing an options object as the third parameter with a `stringify` will mean
+any objects will be passed to the supplied function instead of an the
 internal `tryStringify` function. This can be useful when using augmented
-capability serializers such as [`fast-safe-stringify`](http://github.com/davidmarkclements/fast-safe-stringify) or [`fast-redact`](http://github.com/davidmarkclements/fast-redact).  
+capability serializers such as [`fast-safe-stringify`](http://github.com/davidmarkclements/fast-safe-stringify) or [`fast-redact`](http://github.com/davidmarkclements/fast-redact).
 
 ## caveats
 
-By default `quick-format-unescaped` uses  `JSON.stringify` instead of `util.inspect`, this means functions *will not be serialized*.
+By default `quick-format-unescaped` uses `JSON.stringify` instead of `util.inspect`, this means functions _will not be serialized_.
 
 ## Benchmarks
 
